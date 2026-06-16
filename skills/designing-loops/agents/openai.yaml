@@ -1,0 +1,4 @@
+interface:
+  display_name: "设计 Loops"
+  short_description: "设计可控的自动 Agent 循环"
+  default_prompt: "使用 $designing-loops，为这个重复工作流设计一个可控的自动 Agent loop。"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "定义目标"
+  short_description: "把模糊意图澄清成可验证目标"
+  default_prompt: "使用 $defining-goals，把这个模糊需求澄清成可验证的 Agent 目标。"
