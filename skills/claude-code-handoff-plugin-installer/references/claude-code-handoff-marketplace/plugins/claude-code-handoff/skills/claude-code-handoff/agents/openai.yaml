@@ -1,0 +1,4 @@
+interface:
+  display_name: "Claude Code Handoff"
+  short_description: "Delegate review, debug, test, docs, and implementation scenarios to claude."
+  default_prompt: "Use claude-code-handoff to choose the right development scenario, delegate it to claude, and read back the result."

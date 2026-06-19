@@ -1,9 +1,10 @@
 # Skills
 
-这个仓库用于存放可复用的 AI Agent skills。当前包含两组围绕 Loop Engineering 的中文 skill：
+这个仓库用于存放可复用的 AI Agent skills。当前包含：
 
 - `defining-goals`：定义目标
 - `designing-loops`：设计 Loops
+- `claude-code-handoff-plugin-installer`：安装 Claude Code Handoff Codex 插件
 
 ## Skill 列表
 
@@ -42,6 +43,35 @@
 
 `designing-loops` 依赖 `defining-goals`：设计 loop 前必须先把目标定义清楚。目标不清楚时，不应该启动自动循环。
 
+### `claude-code-handoff-plugin-installer`
+
+用于安装社区版 `claude-code-handoff` Codex 插件。这个 skill 自带完整插件文件，放在：
+
+```text
+skills/claude-code-handoff-plugin-installer/references/claude-code-handoff-marketplace/
+```
+
+安装器会把内置 marketplace 复制到 `~/.agents/claude-code-marketplace/`，注册 Codex marketplace，启用插件配置，并验证：
+
+- 插件文件完整性
+- companion / handoff 脚本语法
+- marketplace 和 `~/.codex/config.toml` 状态
+- `claude` CLI 可用性
+- `inspect` smoke
+
+社区版依赖真正的 Claude Code CLI：
+
+```bash
+npm install -g @anthropic-ai/claude-code@latest
+claude --version
+```
+
+安装这个 skill 后执行：
+
+```bash
+~/.codex/skills/claude-code-handoff-plugin-installer/scripts/install_claude_code_handoff_plugin.sh
+```
+
 ## 让 AI 帮你安装
 
 ### Codex
@@ -52,6 +82,7 @@
 请使用 skill-installer 从 GitHub 仓库 WebXuHao/skills 安装这两个 skill：
 - skills/defining-goals
 - skills/designing-loops
+- skills/claude-code-handoff-plugin-installer
 
 安装到 ~/.codex/skills。安装完成后告诉我需要重启 Codex 或新开 thread 才能使用。
 ```
@@ -63,6 +94,7 @@ mkdir -p ~/.codex/skills
 git clone https://github.com/WebXuHao/skills.git /tmp/webxuhao-skills
 cp -R /tmp/webxuhao-skills/skills/defining-goals ~/.codex/skills/defining-goals
 cp -R /tmp/webxuhao-skills/skills/designing-loops ~/.codex/skills/designing-loops
+cp -R /tmp/webxuhao-skills/skills/claude-code-handoff-plugin-installer ~/.codex/skills/claude-code-handoff-plugin-installer
 ```
 
 安装后重启 Codex，或新开一个 thread。然后可以这样触发：
@@ -70,6 +102,7 @@ cp -R /tmp/webxuhao-skills/skills/designing-loops ~/.codex/skills/designing-loop
 ```text
 $defining-goals
 $designing-loops
+$claude-code-handoff-plugin-installer
 ```
 
 ### Claude Code
@@ -80,6 +113,7 @@ $designing-loops
 请从 https://github.com/WebXuHao/skills 安装两个 skill：
 - skills/defining-goals
 - skills/designing-loops
+- skills/claude-code-handoff-plugin-installer
 
 安装到 ~/.claude/skills。如果当前环境使用其他 skills 目录，请先告诉我目标目录，再复制。
 ```
@@ -91,6 +125,7 @@ mkdir -p ~/.claude/skills
 git clone https://github.com/WebXuHao/skills.git /tmp/webxuhao-skills
 cp -R /tmp/webxuhao-skills/skills/defining-goals ~/.claude/skills/defining-goals
 cp -R /tmp/webxuhao-skills/skills/designing-loops ~/.claude/skills/designing-loops
+cp -R /tmp/webxuhao-skills/skills/claude-code-handoff-plugin-installer ~/.claude/skills/claude-code-handoff-plugin-installer
 ```
 
 ## 仓库结构
@@ -103,6 +138,11 @@ skills/
   designing-loops/
     SKILL.md
     agents/openai.yaml
+  claude-code-handoff-plugin-installer/
+    SKILL.md
+    agents/openai.yaml
+    scripts/install_claude_code_handoff_plugin.sh
+    references/claude-code-handoff-marketplace/
 ```
 
 ## 使用建议

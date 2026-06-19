@@ -1,0 +1,26 @@
+{
+  "name": "claude-code-handoff",
+  "version": "0.1.0",
+  "description": "Delegate Codex reviews, investigations, and bounded implementation tasks to the local Claude Code CLI through auditable files.",
+  "author": {
+    "name": "Xuhao"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Claude Code Handoff",
+    "shortDescription": "Hand Codex work to local Claude Code",
+    "longDescription": "Claude Code Handoff lets Codex delegate read-only reviews, investigations, second opinions, test planning, documentation checks, and bounded write-mode subtasks to the local Claude Code CLI. Results are returned through result.json, metadata files, and git diff rather than shared chat context.",
+    "developerName": "Xuhao",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Ask Claude Code to review my current diff",
+      "Get a second opinion from Claude Code",
+      "Delegate a bounded implementation subtask"
+    ],
+    "brandColor": "#2563EB"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "claude-code-local",
+  "interface": {
+    "displayName": "Claude Code Local"
+  },
+  "plugins": [
+    {
+      "name": "claude-code-handoff",
+      "source": {
+        "source": "local",
+        "path": "./plugins/claude-code-handoff"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Claude Code Plugin Installer"
+  short_description: "Install the bundled claude-code-handoff Codex plugin."
+  default_prompt: "Install the bundled claude-code-handoff plugin, register its marketplace, and verify claude connectivity."
