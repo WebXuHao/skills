@@ -1,0 +1,26 @@
+skills/devspace-mcp-setup/agents/openai.yaml
+  s_a72d3c2d1605f6::t_54501e637aea14 1-4
+skills/devspace-mcp-setup/SKILL.md
+  s_a72d3c2d1605f6::t_54501e637aea14 1-174
+README.md
+  s_a72d3c2d1605f6::t_b1bada945bb9b5 8,12-31,104,117,126,138,151,161-164
+  s_a72d3c2d1605f6::t_883d5bd429fdb2 103,137
+skills/devspace-mcp-setup/scripts/devspace_mcp_smoke.mjs
+  s_a72d3c2d1605f6::t_54501e637aea14 1-218
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "81054e479cc2d4cbc869e39514b0be55557846e8",
+  "prompts": {},
+  "sessions": {
+    "s_a72d3c2d1605f6": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ed9e0-1459-7ad3-aef2-cf4ea6b4fb5f",
+        "model": "gpt-5.5"
+      },
+      "human_author": "XuHao <xuhao2@xiaohongshu.com>"
+    }
+  }
+}
