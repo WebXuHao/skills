@@ -1,0 +1,4 @@
+interface:
+  display_name: "DevSpace MCP 调通"
+  short_description: "安装、暴露并验证 DevSpace MCP"
+  default_prompt: "使用 $devspace-mcp-setup，帮我安装、配置并验证 DevSpace MCP 到真实 open_workspace/read 调用成功。"

@@ -5,8 +5,29 @@
 - `defining-goals`：定义目标
 - `designing-loops`：设计 Loops
 - `claude-code-handoff-plugin-installer`：安装 Claude Code Handoff Codex 插件
+- `devspace-mcp-setup`：安装、配置并验证 DevSpace MCP
 
 ## Skill 列表
+
+### `devspace-mcp-setup`
+
+用于把 `@waishnav/devspace` 从零安装到真实 MCP 调通状态。
+
+适合这些场景：
+
+- 把 ChatGPT 或其他 MCP client 连接到本机项目目录。
+- 用 Cloudflare tunnel、自有域名或公网 HTTPS 暴露 DevSpace MCP。
+- 判断 ChatGPT UI 显示异常时，MCP 协议层是否真实可用。
+- 通过只读 marker 文件验证 `tools/list`、`open_workspace` 和 `read`。
+- 检查 `allowedRoots`、owner password、`bash` 暴露风险等安全边界。
+
+这个 skill 自带 smoke 脚本：
+
+```bash
+~/.codex/skills/devspace-mcp-setup/scripts/devspace_mcp_smoke.mjs
+```
+
+脚本默认从 `~/.devspace/auth.json` 读取 owner token，但不会打印 secret。成功时会输出 endpoint、工具列表、workspaceId 和 marker 检查结果。
 
 ### `defining-goals`
 
@@ -79,7 +100,8 @@ claude --version
 把下面这段话发给 Codex：
 
 ```text
-请使用 skill-installer 从 GitHub 仓库 WebXuHao/skills 安装这两个 skill：
+请使用 skill-installer 从 GitHub 仓库 WebXuHao/skills 安装这些 skill：
+- skills/devspace-mcp-setup
 - skills/defining-goals
 - skills/designing-loops
 - skills/claude-code-handoff-plugin-installer
@@ -92,6 +114,7 @@ claude --version
 ```bash
 mkdir -p ~/.codex/skills
 git clone https://github.com/WebXuHao/skills.git /tmp/webxuhao-skills
+cp -R /tmp/webxuhao-skills/skills/devspace-mcp-setup ~/.codex/skills/devspace-mcp-setup
 cp -R /tmp/webxuhao-skills/skills/defining-goals ~/.codex/skills/defining-goals
 cp -R /tmp/webxuhao-skills/skills/designing-loops ~/.codex/skills/designing-loops
 cp -R /tmp/webxuhao-skills/skills/claude-code-handoff-plugin-installer ~/.codex/skills/claude-code-handoff-plugin-installer
@@ -100,6 +123,7 @@ cp -R /tmp/webxuhao-skills/skills/claude-code-handoff-plugin-installer ~/.codex/
 安装后重启 Codex，或新开一个 thread。然后可以这样触发：
 
 ```text
+$devspace-mcp-setup
 $defining-goals
 $designing-loops
 $claude-code-handoff-plugin-installer
@@ -110,7 +134,8 @@ $claude-code-handoff-plugin-installer
 把下面这段话发给 Claude Code：
 
 ```text
-请从 https://github.com/WebXuHao/skills 安装两个 skill：
+请从 https://github.com/WebXuHao/skills 安装这些 skill：
+- skills/devspace-mcp-setup
 - skills/defining-goals
 - skills/designing-loops
 - skills/claude-code-handoff-plugin-installer
@@ -123,6 +148,7 @@ $claude-code-handoff-plugin-installer
 ```bash
 mkdir -p ~/.claude/skills
 git clone https://github.com/WebXuHao/skills.git /tmp/webxuhao-skills
+cp -R /tmp/webxuhao-skills/skills/devspace-mcp-setup ~/.claude/skills/devspace-mcp-setup
 cp -R /tmp/webxuhao-skills/skills/defining-goals ~/.claude/skills/defining-goals
 cp -R /tmp/webxuhao-skills/skills/designing-loops ~/.claude/skills/designing-loops
 cp -R /tmp/webxuhao-skills/skills/claude-code-handoff-plugin-installer ~/.claude/skills/claude-code-handoff-plugin-installer
@@ -132,6 +158,10 @@ cp -R /tmp/webxuhao-skills/skills/claude-code-handoff-plugin-installer ~/.claude
 
 ```text
 skills/
+  devspace-mcp-setup/
+    SKILL.md
+    agents/openai.yaml
+    scripts/devspace_mcp_smoke.mjs
   defining-goals/
     SKILL.md
     agents/openai.yaml
