@@ -1,0 +1,19 @@
+skills/devspace-mcp-setup/SKILL.md
+  s_a72d3c2d1605f6::t_af75f90efbae6a 69-78,82-86,90-144,150
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "2ca1755b5a60c5432e0473a03ac61b36a846c024",
+  "prompts": {},
+  "sessions": {
+    "s_a72d3c2d1605f6": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ed9e0-1459-7ad3-aef2-cf4ea6b4fb5f",
+        "model": "gpt-5.5"
+      },
+      "human_author": "XuHao <xuhao2@xiaohongshu.com>"
+    }
+  }
+}
