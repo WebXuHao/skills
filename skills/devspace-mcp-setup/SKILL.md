@@ -66,18 +66,88 @@ curl http://127.0.0.1:7676/healthz
 
 5. 暴露公网入口。
 
-临时验证可用 quick tunnel：
+## Cloudflare 转发流程
+
+DevSpace 的本地服务默认监听 `http://127.0.0.1:7676`。Cloudflare 只负责把一个公网 HTTPS hostname 转发到这个本地地址。这里有两条路径：
+
+- quick tunnel：最快拿到临时公网地址，适合首次 smoke test。
+- named tunnel + 自有域名：适合长期使用，推荐用于 ChatGPT 或其他 MCP client 的固定配置。
+
+### 路径 A：quick tunnel 临时公网地址
+
+临时验证可用 quick tunnel。它会生成一个随机 `trycloudflare.com` 地址：
 
 ```bash
 cloudflared tunnel --url http://127.0.0.1:7676
+```
+
+拿到地址后，把 DevSpace 的 public base URL 设置为该地址，不包含 `/mcp`：
+
+```bash
 devspace config set publicBaseUrl https://example.trycloudflare.com
 ```
 
-长期使用应改成 named tunnel 和自有域名，例如：
+MCP client 使用的最终 endpoint 是：
+
+```text
+https://example.trycloudflare.com/mcp
+```
+
+quick tunnel 的缺点是 URL 会变，适合临时验证，不适合长期写进 ChatGPT App 或团队配置。
+
+### 路径 B：named tunnel + 自有域名
+
+长期方案用 Cloudflare 账号下的 named tunnel，把自己的子域名转发到本机 DevSpace。
+
+先登录 Cloudflare：
+
+```bash
+cloudflared tunnel login
+```
+
+创建 tunnel：
+
+```bash
+cloudflared tunnel create devspace
+```
+
+把子域名路由到 tunnel：
+
+```bash
+cloudflared tunnel route dns devspace devspace.example.com
+```
+
+创建 `~/.cloudflared/config.yml`，把公网 hostname 指向本机 DevSpace：
+
+```yaml
+tunnel: devspace
+credentials-file: /Users/you/.cloudflared/<tunnel-id>.json
+
+ingress:
+  - hostname: devspace.example.com
+    service: http://127.0.0.1:7676
+  - service: http_status:404
+```
+
+启动 tunnel：
+
+```bash
+cloudflared tunnel run devspace
+```
+
+设置 DevSpace public base URL：
+
+```bash
+devspace config set publicBaseUrl https://devspace.example.com
+```
+
+MCP client 使用：
 
 ```text
 https://devspace.example.com/mcp
 ```
+
+如果用户已有自己的域名，优先走 named tunnel。配置成功后再考虑加 Cloudflare Access 或其他访问控制，尤其是在 DevSpace 暴露 `bash` 时。
 
 ## 验证流程
 
