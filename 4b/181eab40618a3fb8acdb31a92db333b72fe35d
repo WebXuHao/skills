@@ -1,0 +1,19 @@
+README.md
+  s_6ff07fb816d558::t_c17d86abe57c13 3,7,46-74,85,97,105,116,128,141-145
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "4b181eab40618a3fb8acdb31a92db333b72fe35d",
+  "prompts": {},
+  "sessions": {
+    "s_6ff07fb816d558": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ed9de-3bc7-7122-81bb-f2c1a553ccfd",
+        "model": "gpt-5.5"
+      },
+      "human_author": "XuHao <xuhao2@xiaohongshu.com>"
+    }
+  }
+}
