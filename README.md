@@ -6,6 +6,7 @@
 - `designing-loops`：设计 Loops
 - `claude-code-handoff-plugin-installer`：安装 Claude Code Handoff Codex 插件
 - `devspace-mcp-setup`：安装、配置并验证 DevSpace MCP
+- `website-to-design-md`：从真实网站提取可复用的 `DESIGN.md`
 
 ## Skill 列表
 
@@ -28,6 +29,19 @@
 ```
 
 脚本默认从 `~/.devspace/auth.json` 读取 owner token，但不会打印 secret。成功时会输出 endpoint、工具列表、workspaceId 和 marker 检查结果。
+
+### `website-to-design-md`
+
+用于把真实网站转成可复用的 `DESIGN.md`，并生成一个同级 HTML preview，方便检查配色、排版、间距、组件规则和 markdown 原文。
+
+适合这些场景：
+
+- 给定一个或多个网站 URL，需要反向提取视觉语言、布局规则、组件风格和文案语气。
+- 需要为后续 AI 辅助设计或实现准备设计系统上下文，而不是复刻页面代码。
+- 需要通过 `agent-browser eval` 从 live DOM、computed styles、CSS variables、visible text 和交互状态中取证。
+- 需要在网站支持 light / dark mode 时分别记录主题 token 和组件差异。
+
+这个 skill 来自 [Paidax01/web-to-design-md](https://github.com/Paidax01/web-to-design-md)。上游当前没有附带 LICENSE 文件；本仓库保留原始来源说明，没有另行补许可证。
 
 ### `defining-goals`
 
@@ -105,6 +119,7 @@ claude --version
 - skills/defining-goals
 - skills/designing-loops
 - skills/claude-code-handoff-plugin-installer
+- skills/website-to-design-md
 
 安装到 ~/.codex/skills。安装完成后告诉我需要重启 Codex 或新开 thread 才能使用。
 ```
@@ -118,6 +133,7 @@ cp -R /tmp/webxuhao-skills/skills/devspace-mcp-setup ~/.codex/skills/devspace-mc
 cp -R /tmp/webxuhao-skills/skills/defining-goals ~/.codex/skills/defining-goals
 cp -R /tmp/webxuhao-skills/skills/designing-loops ~/.codex/skills/designing-loops
 cp -R /tmp/webxuhao-skills/skills/claude-code-handoff-plugin-installer ~/.codex/skills/claude-code-handoff-plugin-installer
+cp -R /tmp/webxuhao-skills/skills/website-to-design-md ~/.codex/skills/website-to-design-md
 ```
 
 安装后重启 Codex，或新开一个 thread。然后可以这样触发：
@@ -127,6 +143,7 @@ $devspace-mcp-setup
 $defining-goals
 $designing-loops
 $claude-code-handoff-plugin-installer
+$website-to-design-md
 ```
 
 ### Claude Code
@@ -139,6 +156,7 @@ $claude-code-handoff-plugin-installer
 - skills/defining-goals
 - skills/designing-loops
 - skills/claude-code-handoff-plugin-installer
+- skills/website-to-design-md
 
 安装到 ~/.claude/skills。如果当前环境使用其他 skills 目录，请先告诉我目标目录，再复制。
 ```
@@ -152,6 +170,7 @@ cp -R /tmp/webxuhao-skills/skills/devspace-mcp-setup ~/.claude/skills/devspace-m
 cp -R /tmp/webxuhao-skills/skills/defining-goals ~/.claude/skills/defining-goals
 cp -R /tmp/webxuhao-skills/skills/designing-loops ~/.claude/skills/designing-loops
 cp -R /tmp/webxuhao-skills/skills/claude-code-handoff-plugin-installer ~/.claude/skills/claude-code-handoff-plugin-installer
+cp -R /tmp/webxuhao-skills/skills/website-to-design-md ~/.claude/skills/website-to-design-md
 ```
 
 ## 仓库结构
@@ -173,6 +192,16 @@ skills/
     agents/openai.yaml
     scripts/install_claude_code_handoff_plugin.sh
     references/claude-code-handoff-marketplace/
+  website-to-design-md/
+    SKILL.md
+    agents/openai.yaml
+    assets/DESIGN.template.md
+    assets/design-preview-shell.template.html
+    references/browser-tooling-bootstrap.md
+    references/website-reading-checklist.md
+    scripts/check-browser-tooling.mjs
+    scripts/extract-browser-evidence.mjs
+    scripts/render-design-preview.mjs
 ```
 
 ## 使用建议
