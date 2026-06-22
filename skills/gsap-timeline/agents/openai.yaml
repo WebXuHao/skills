@@ -1,0 +1,4 @@
+interface:
+  display_name: "GSAP Timeline"
+  short_description: "Sequencing, labels, nesting, and playback"
+  default_prompt: "Use $gsap-timeline to choreograph a multi-step GSAP animation timeline."

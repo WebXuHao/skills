@@ -1,0 +1,4 @@
+interface:
+  display_name: "GSAP Plugins"
+  short_description: "Plugin registration, Flip, Draggable, SVG, text"
+  default_prompt: "Use $gsap-plugins to choose and wire the right GSAP plugin for this animation."

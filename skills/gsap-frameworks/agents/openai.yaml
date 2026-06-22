@@ -1,0 +1,4 @@
+interface:
+  display_name: "GSAP Frameworks"
+  short_description: "Vue, Svelte, lifecycle scoping and cleanup"
+  default_prompt: "Use $gsap-frameworks to write GSAP animation code for Vue, Svelte, or similar frameworks."

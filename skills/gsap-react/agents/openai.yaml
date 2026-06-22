@@ -1,0 +1,4 @@
+interface:
+  display_name: "GSAP React"
+  short_description: "useGSAP, refs, context, cleanup, SSR"
+  default_prompt: "Use $gsap-react to implement React or Next.js animation with GSAP cleanup and scoping."

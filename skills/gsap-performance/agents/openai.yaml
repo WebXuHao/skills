@@ -1,0 +1,4 @@
+interface:
+  display_name: "GSAP Performance"
+  short_description: "Transforms, batching, will-change, smooth 60fps"
+  default_prompt: "Use $gsap-performance to optimize GSAP animations for smooth rendering."

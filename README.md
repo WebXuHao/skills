@@ -7,6 +7,7 @@
 - `claude-code-handoff-plugin-installer`：安装 Claude Code Handoff Codex 插件
 - `devspace-mcp-setup`：安装、配置并验证 DevSpace MCP
 - `website-to-design-md`：从真实网站提取可复用的 `DESIGN.md`
+- `gsap-*`：GSAP 官方动画 skill 组，覆盖 core、timeline、ScrollTrigger、plugins、React、Vue/Svelte、utils 和 performance
 
 ## Skill 列表
 
@@ -42,6 +43,21 @@
 - 需要在网站支持 light / dark mode 时分别记录主题 token 和组件差异。
 
 这个 skill 来自 [Paidax01/web-to-design-md](https://github.com/Paidax01/web-to-design-md)。上游当前没有附带 LICENSE 文件；本仓库保留原始来源说明，没有另行补许可证。
+
+### `gsap-*`
+
+用于写作、审查和优化 GSAP 动画代码。这个 skill 组来自 [greensock/gsap-skills](https://github.com/greensock/gsap-skills)，上游为 MIT License。
+
+包含这些独立 skill：
+
+- `gsap-core`：`gsap.to()` / `from()` / `fromTo()`、easing、duration、stagger、`gsap.matchMedia()`
+- `gsap-timeline`：timeline sequencing、position parameter、labels、nesting、playback
+- `gsap-scrolltrigger`：scroll-linked animation、pinning、scrub、trigger lifecycle
+- `gsap-plugins`：ScrollToPlugin、ScrollSmoother、Flip、Draggable、Inertia、Observer、SplitText、SVG plugins 等
+- `gsap-utils`：`clamp`、`mapRange`、`normalize`、`random`、`snap`、`toArray`、`wrap`、`pipe`
+- `gsap-react`：`useGSAP`、refs、`gsap.context()`、cleanup、SSR
+- `gsap-performance`：transform 优先、避免 layout thrashing、`will-change`、batching
+- `gsap-frameworks`：Vue、Nuxt、Svelte、SvelteKit 等非 React 框架生命周期和 cleanup
 
 ### `defining-goals`
 
@@ -120,6 +136,14 @@ claude --version
 - skills/designing-loops
 - skills/claude-code-handoff-plugin-installer
 - skills/website-to-design-md
+- skills/gsap-core
+- skills/gsap-timeline
+- skills/gsap-scrolltrigger
+- skills/gsap-plugins
+- skills/gsap-utils
+- skills/gsap-react
+- skills/gsap-performance
+- skills/gsap-frameworks
 
 安装到 ~/.codex/skills。安装完成后告诉我需要重启 Codex 或新开 thread 才能使用。
 ```
@@ -134,6 +158,9 @@ cp -R /tmp/webxuhao-skills/skills/defining-goals ~/.codex/skills/defining-goals
 cp -R /tmp/webxuhao-skills/skills/designing-loops ~/.codex/skills/designing-loops
 cp -R /tmp/webxuhao-skills/skills/claude-code-handoff-plugin-installer ~/.codex/skills/claude-code-handoff-plugin-installer
 cp -R /tmp/webxuhao-skills/skills/website-to-design-md ~/.codex/skills/website-to-design-md
+for skill in gsap-core gsap-timeline gsap-scrolltrigger gsap-plugins gsap-utils gsap-react gsap-performance gsap-frameworks; do
+  cp -R "/tmp/webxuhao-skills/skills/$skill" "$HOME/.codex/skills/$skill"
+done
 ```
 
 安装后重启 Codex，或新开一个 thread。然后可以这样触发：
@@ -144,6 +171,14 @@ $defining-goals
 $designing-loops
 $claude-code-handoff-plugin-installer
 $website-to-design-md
+$gsap-core
+$gsap-timeline
+$gsap-scrolltrigger
+$gsap-plugins
+$gsap-utils
+$gsap-react
+$gsap-performance
+$gsap-frameworks
 ```
 
 ### Claude Code
@@ -157,6 +192,14 @@ $website-to-design-md
 - skills/designing-loops
 - skills/claude-code-handoff-plugin-installer
 - skills/website-to-design-md
+- skills/gsap-core
+- skills/gsap-timeline
+- skills/gsap-scrolltrigger
+- skills/gsap-plugins
+- skills/gsap-utils
+- skills/gsap-react
+- skills/gsap-performance
+- skills/gsap-frameworks
 
 安装到 ~/.claude/skills。如果当前环境使用其他 skills 目录，请先告诉我目标目录，再复制。
 ```
@@ -171,6 +214,9 @@ cp -R /tmp/webxuhao-skills/skills/defining-goals ~/.claude/skills/defining-goals
 cp -R /tmp/webxuhao-skills/skills/designing-loops ~/.claude/skills/designing-loops
 cp -R /tmp/webxuhao-skills/skills/claude-code-handoff-plugin-installer ~/.claude/skills/claude-code-handoff-plugin-installer
 cp -R /tmp/webxuhao-skills/skills/website-to-design-md ~/.claude/skills/website-to-design-md
+for skill in gsap-core gsap-timeline gsap-scrolltrigger gsap-plugins gsap-utils gsap-react gsap-performance gsap-frameworks; do
+  cp -R "/tmp/webxuhao-skills/skills/$skill" "$HOME/.claude/skills/$skill"
+done
 ```
 
 ## 仓库结构
@@ -202,6 +248,38 @@ skills/
     scripts/check-browser-tooling.mjs
     scripts/extract-browser-evidence.mjs
     scripts/render-design-preview.mjs
+  gsap-core/
+    SKILL.md
+    LICENSE
+    agents/openai.yaml
+  gsap-timeline/
+    SKILL.md
+    LICENSE
+    agents/openai.yaml
+  gsap-scrolltrigger/
+    SKILL.md
+    LICENSE
+    agents/openai.yaml
+  gsap-plugins/
+    SKILL.md
+    LICENSE
+    agents/openai.yaml
+  gsap-utils/
+    SKILL.md
+    LICENSE
+    agents/openai.yaml
+  gsap-react/
+    SKILL.md
+    LICENSE
+    agents/openai.yaml
+  gsap-performance/
+    SKILL.md
+    LICENSE
+    agents/openai.yaml
+  gsap-frameworks/
+    SKILL.md
+    LICENSE
+    agents/openai.yaml
 ```
 
 ## 使用建议

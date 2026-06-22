@@ -1,0 +1,4 @@
+interface:
+  display_name: "GSAP Utils"
+  short_description: "Clamp, mapRange, random, snap, wrap, helpers"
+  default_prompt: "Use $gsap-utils to apply GSAP utility helpers cleanly in animation code."

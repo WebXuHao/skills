@@ -1,0 +1,4 @@
+interface:
+  display_name: "GSAP Core"
+  short_description: "Core tweens, easing, stagger, and matchMedia"
+  default_prompt: "Use $gsap-core to implement or review a GSAP tween with correct core API patterns."
