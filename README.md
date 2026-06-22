@@ -7,6 +7,7 @@
 - `claude-code-handoff-plugin-installer`：安装 Claude Code Handoff Codex 插件
 - `devspace-mcp-setup`：安装、配置并验证 DevSpace MCP
 - `website-to-design-md`：从真实网站提取可复用的 `DESIGN.md`
+- `text-to-lottie`：用官方 player 生成、预览和验证生产可用的 Lottie JSON
 - `gsap-*`：GSAP 官方动画 skill 组，覆盖 core、timeline、ScrollTrigger、plugins、React、Vue/Svelte、utils 和 performance
 
 ## Skill 列表
@@ -43,6 +44,23 @@
 - 需要在网站支持 light / dark mode 时分别记录主题 token 和组件差异。
 
 这个 skill 来自 [Paidax01/web-to-design-md](https://github.com/Paidax01/web-to-design-md)。上游当前没有附带 LICENSE 文件；本仓库保留原始来源说明，没有另行补许可证。
+
+### `text-to-lottie`
+
+用于通过官方 Diffusion Studio player 生成、编辑和验证 Lottie / Bodymovin JSON 动画。这个 skill 来自 [diffusionstudio/lottie](https://github.com/diffusionstudio/lottie)，上游为 MIT License。
+
+适合这些场景：
+
+- 用户要求创建、生成、编辑或修复 Lottie 动画。
+- 用户给了 SVG、截图、路径、品牌元素或 motion brief，需要转成可预览的 Lottie JSON。
+- 需要把动画写入官方 player 的 `public/projects/<project>/<scene-N>/lottie.json` 结构。
+- 需要通过本地浏览器 player 检查关键帧、背景色 control、slot controls 和渲染结果。
+
+这个 skill 运行时会使用官方 player 项目。当前机器已全局安装 `degit`，可用于拉取 player：
+
+```bash
+degit diffusionstudio/lottie my-animation
+```
 
 ### `gsap-*`
 
@@ -136,6 +154,7 @@ claude --version
 - skills/designing-loops
 - skills/claude-code-handoff-plugin-installer
 - skills/website-to-design-md
+- skills/text-to-lottie
 - skills/gsap-core
 - skills/gsap-timeline
 - skills/gsap-scrolltrigger
@@ -158,6 +177,7 @@ cp -R /tmp/webxuhao-skills/skills/defining-goals ~/.codex/skills/defining-goals
 cp -R /tmp/webxuhao-skills/skills/designing-loops ~/.codex/skills/designing-loops
 cp -R /tmp/webxuhao-skills/skills/claude-code-handoff-plugin-installer ~/.codex/skills/claude-code-handoff-plugin-installer
 cp -R /tmp/webxuhao-skills/skills/website-to-design-md ~/.codex/skills/website-to-design-md
+cp -R /tmp/webxuhao-skills/skills/text-to-lottie ~/.codex/skills/text-to-lottie
 for skill in gsap-core gsap-timeline gsap-scrolltrigger gsap-plugins gsap-utils gsap-react gsap-performance gsap-frameworks; do
   cp -R "/tmp/webxuhao-skills/skills/$skill" "$HOME/.codex/skills/$skill"
 done
@@ -171,6 +191,7 @@ $defining-goals
 $designing-loops
 $claude-code-handoff-plugin-installer
 $website-to-design-md
+$text-to-lottie
 $gsap-core
 $gsap-timeline
 $gsap-scrolltrigger
@@ -192,6 +213,7 @@ $gsap-frameworks
 - skills/designing-loops
 - skills/claude-code-handoff-plugin-installer
 - skills/website-to-design-md
+- skills/text-to-lottie
 - skills/gsap-core
 - skills/gsap-timeline
 - skills/gsap-scrolltrigger
@@ -214,6 +236,7 @@ cp -R /tmp/webxuhao-skills/skills/defining-goals ~/.claude/skills/defining-goals
 cp -R /tmp/webxuhao-skills/skills/designing-loops ~/.claude/skills/designing-loops
 cp -R /tmp/webxuhao-skills/skills/claude-code-handoff-plugin-installer ~/.claude/skills/claude-code-handoff-plugin-installer
 cp -R /tmp/webxuhao-skills/skills/website-to-design-md ~/.claude/skills/website-to-design-md
+cp -R /tmp/webxuhao-skills/skills/text-to-lottie ~/.claude/skills/text-to-lottie
 for skill in gsap-core gsap-timeline gsap-scrolltrigger gsap-plugins gsap-utils gsap-react gsap-performance gsap-frameworks; do
   cp -R "/tmp/webxuhao-skills/skills/$skill" "$HOME/.claude/skills/$skill"
 done
@@ -248,6 +271,10 @@ skills/
     scripts/check-browser-tooling.mjs
     scripts/extract-browser-evidence.mjs
     scripts/render-design-preview.mjs
+  text-to-lottie/
+    SKILL.md
+    LICENSE
+    agents/openai.yaml
   gsap-core/
     SKILL.md
     LICENSE

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Text to Lottie"
+  short_description: "Generate and verify production-ready Lottie JSON"
+  default_prompt: "Use $text-to-lottie to create a production-ready Lottie animation in the official player."
